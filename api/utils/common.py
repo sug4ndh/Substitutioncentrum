@@ -9,9 +9,11 @@ import logging
 logger = logging.getLogger('testsearch')
 
 def rev_results(x):
+    '''Sorts array 'x' in descending order of probability score passed as argument'''
     return sorted(x, key=itemgetter(0), reverse=True)
 
 def load_data_index():
+    '''Loads the index to return the correct chem id'''
     data_path = os.path.abspath(os.path.dirname(__file__))
     data_index = np.load(os.path.join(data_path, "../data/zipped_data.sav.npy"))
     logger.info(data_path)
@@ -19,6 +21,7 @@ def load_data_index():
     return data_index
 
 def gen_search_results(query, algo='ft'):
+    '''Generates the chem ids relevant to the search term(s) and return them as list'''
     unsorted_sim = []
     search_res = []
     data_index = load_data_index()

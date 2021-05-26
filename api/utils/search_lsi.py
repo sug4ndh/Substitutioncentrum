@@ -6,11 +6,13 @@ from gensim.models import LsiModel
 from .loader import load_docsim, load_dictionary
 
 def load_lsi_model():
+    '''Loads the saved bow+lsi model'''
     data_path = os.path.abspath(os.path.dirname(__file__))
     lsi_model = LsiModel.load(os.path.join(data_path, "../data/lsi/lsimodel.sav"))
     return lsi_model
 
 def lsi_sim(query, algo):
+    '''Returns documents similar to the query'''
     dictionary = load_dictionary()
     vec_bow = dictionary.doc2bow(query.lower().split())
     lsi_model = load_lsi_model()

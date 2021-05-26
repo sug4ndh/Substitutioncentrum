@@ -7,6 +7,7 @@ from .loader import load_tfidf_model, load_dictionary, load_docsim
 logger = logging.getLogger('ft')
 
 def load_fasttext_model():
+    '''Loads the saved fasttext model'''
     data_path = os.path.abspath(os.path.dirname(__file__))
     ft_model = FastText.load(os.path.join(data_path, "../data/fasttext/fasttext.sav"))
     logger.info("Fasttext model loaded.")

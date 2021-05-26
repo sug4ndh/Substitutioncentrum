@@ -18,30 +18,35 @@ import logging
 logger = logging.getLogger('loader')
 
 def text_processing(documents):
-    # remove common words and tokenize
+    '''Processing the information received from the database,
+    remove common words and tokenize'''
     texts = [utils.simple_preprocess(document['text'])
              for document in documents]
     return texts
 
 def load_dictionary():
+    '''Loads the saved dictionary created while training the models'''
     data_path = os.path.abspath(os.path.dirname(__file__))
     dictionary = corpora.Dictionary.load_from_text(os.path.join(data_path, "../data/dict.sav"))
     logger.info("Dictionary loaded.")
     return dictionary
 
 def load_corpus():
+    '''Loads the saved corpus created while training the models'''
     data_path = os.path.abspath(os.path.dirname(__file__))
     corpus = corpora.MmCorpus(os.path.join(data_path, "../data/corpus.mm"))
     logger.info("Corpus loaded.")
     return corpus
 
 def load_tfidf_model():
+    '''Loads the saved tfidf model'''
     data_path = os.path.abspath(os.path.dirname(__file__))
     tfidf = TfidfModel.load(os.path.join(data_path, "../data/tfidf.sav"))
     logger.info("Tfidf model loaded.")
     return tfidf
 
 def load_docsim(algo):
+    '''Loads the softcosine similarity index/matrix for the model passed as the argument'''
     data_path = os.path.abspath(os.path.dirname(__file__))
     if algo =='ft':
         docsim = SoftCosineSimilarity.load(os.path.join(data_path, "../data/fasttext/ft_docsim_index.sav"))
